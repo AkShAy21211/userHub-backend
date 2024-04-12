@@ -47,6 +47,7 @@ const updateProfile = async (req, res) => {
   const { name, email, phone } = req.body;
 
   const image = req.file ? req.file.path : "";
+  const imageName = image.split('\\').pop();
 
   try {
     let user = await userModel.findOneAndUpdate(
@@ -58,7 +59,7 @@ const updateProfile = async (req, res) => {
     if (image) {
       user = await userModel.findOneAndUpdate(
         { _id: req.user._id },
-        { $set: { image: image } },
+        { $set: { image: imageName } },
         { new: true }
       );
     } else {
@@ -79,6 +80,7 @@ const createPost = async (req, res) => {
   const { title, content } = req.body;
 
   const image = req.file ? req.file.path : "";
+  const imageName = image.split('\\').pop();
 
   const id = req.user?req.user._id:null;
 
@@ -87,7 +89,7 @@ const createPost = async (req, res) => {
     const post = new postModel({
       title: title,
       content: content,
-      image: image,
+      image: imageName,
       author:id
     });
 
