@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const { createToken } = require("../helper/jwt");
 const postModel = require("../models/postModel");
+const path = require('path');
 
 const register = async (req, res) => {
   const { name, email, phone, password } = req.body;
@@ -47,7 +48,7 @@ const updateProfile = async (req, res) => {
   const { name, email, phone } = req.body;
 
   const image = req.file ? req.file.path : "";
-  const imageName = image.split('\\').pop();
+  const imageName = image ? path.basename(image) : "";
 
   try {
     let user = await userModel.findOneAndUpdate(
@@ -80,7 +81,7 @@ const createPost = async (req, res) => {
   const { title, content } = req.body;
 
   const image = req.file ? req.file.path : "";
-  const imageName = image.split('\\').pop();
+  const imageName = image ? path.basename(image) : "";
 
   const id = req.user?req.user._id:null;
 
