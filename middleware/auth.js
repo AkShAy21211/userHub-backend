@@ -4,9 +4,8 @@ const userModel = require("../models/userModel")
 const isUserLoggedIn = async(req,res,next)=>{
 
     const {authorization} = req.headers;
-    console.log("Backend....",authorization);
+    console.log(req.headers);
     if(!authorization){
-
         return res.status(403).json({error:"Authorization token require"});
     }
      const token = authorization.split(' ')[1];

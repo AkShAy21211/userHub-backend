@@ -69,7 +69,9 @@ userSchema.statics.register = async function (name, email, phone, password) {
       name: name,
       email: email,
       phone: phone,
+      image:null,
       password: hashPassword,
+      
     });
 
     return newUser;

@@ -1,16 +1,16 @@
-require("dotenv").config()
-const cors = require("cors");  
-const createError = require('http-errors');
+require("dotenv").config();
 const express = require('express');
-const config = require("./config/config");
-const path = require('path');
+const cors = require("cors")
 const usersRouter = require('./routes/users');
-
+const config = require("./config/config")
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin:[process.env.LOCAL_URL,process.env.HOST_URL]
+}));
+ 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(express.static('public'));
 
 app.use('/', usersRouter);
 
