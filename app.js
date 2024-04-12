@@ -5,7 +5,7 @@ const usersRouter = require('./routes/users');
 const config = require("./config/config")
 const app = express();
 app.use(cors({
-  origin:[process.env.LOCAL_URL,process.env.HOST_URL]
+  origin:[process.env.LOCAL_URL,process.env.HOST_URL,process.env.HOST_URL_TWO]
 }));
  
 app.use(express.json());
